@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BankShield — Fake Banking APK Detector</title>
+  <meta name="description" content="AI-powered tool to detect fake banking APKs with static & dynamic indicators, threat intel, and a clean dashboard." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <!-- NAV -->
+  <header>
+    <nav class="nav">
+      <div class="logo">BankShield</div>
+      <div class="navlinks">
+        <a href="#features">Features</a>
+        <a href="#scan">Scan APK</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#problem">Problem</a>
+        <a href="#faq">FAQ</a>
+        <a class="cta" href="#scan">Try Demo</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <span class="pill">Cyber Fraud Prevention • APK Intelligence</span>
+      <h1 class="h-title">Detect Fake Banking APKs — before they steal credentials</h1>
+      <p class="h-sub">AI-assisted static indicators, dynamic behavior cues, and threat-intel lookups combined into a single, lightweight interface designed for banks, CERT teams, and law enforcement.</p>
+      <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
+        <a class="cta" href="#scan">Upload & Scan</a>
+        <a class="btn ghost" href="#dashboard">Open Dashboard</a>
+      </div>
+      <p style="margin-top:10px;font-size:.9rem;color:#93a3b8">Demo only — no files are uploaded. All analysis is simulated on-device for the prototype.</p>
+    </div>
+    <div class="panel card">
+      <h3 style="margin-bottom:8px">Quick Risk Snapshot</h3>
+      <p style="margin-top:0">Recent detections from live feeds (demo data)</p>
+      <div class="grid-2" style="margin-top:10px">
+        <div class="feature">
+          <div class="tag">Avg Risk Score</div>
+          <div style="font-size:2.2rem;font-weight:800">72</div>
+        </div>
+        <div class="feature">
+          <div class="tag">New APKs Flagged / 24h</div>
+          <div style="font-size:2.2rem;font-weight:800">37</div>
+        </div>
+      </div>
+      <div style="margin-top:12px" class="progress"><div id="heroBar" class="bar" style="width:72%"></div></div>
+      <p style="font-size:.9rem;color:#93a3b8;margin-top:6px">Thresholds: <span class="badge b-warn">Suspicious ≥ 60</span> <span class="badge b-bad">Malicious ≥ 80</span></p>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <h2>Key Features</h2>
+    <div class="grid-3">
+      <div class="panel feature"><h3>Static Analysis</h3><p>Inspect manifest, permissions, certificate fingerprints, package name spoofing, and hardcoded URLs.</p></div>
+      <div class="panel feature"><h3>Dynamic Cues</h3><p>Runtime behavior heuristics (overlay creation, SMS/OTP interception, accessibility abuse).</p></div>
+      <div class="panel feature"><h3>AI Scoring</h3><p>Feature-engineered model combining 50+ signals into a single risk score (0–100).</p></div>
+      <div class="panel feature"><h3>Threat Intelligence</h3><p>IOC enrichment for domains/IPs, ASN, WHOIS freshness, blocklists, and sinkhole matches.</p></div>
+      <div class="panel feature"><h3>Evidence Bundle</h3><p>Export JSON report with indicators, hashes, and decision trace for case files.</p></div>
+      <div class="panel feature"><h3>Privacy-first Demo</h3><p>No uploads in prototype. Everything runs locally in your browser for testing UX.</p></div>
+    </div>
+  </section>
+
+  <!-- SCAN -->
+  <section id="scan">
+    <div class="grid-2">
+      <div class="panel card">
+        <h2>Upload & Scan (Demo)</h2>
+        <label class="upload" id="drop">
+          <div>
+            <h3 style="margin:0 0 6px">Drag & drop APK</h3>
+            <p style="margin:0">or <strong>click to choose</strong> — .apk only</p>
+          </div>
+          <input id="file" type="file" accept=".apk" />
+        </label>
+        <div style="margin-top:12px" class="progress"><div id="progressBar" class="bar"></div></div>
+        <div id="scanMeta" style="display:none;margin-top:12px">
+          <p><strong>File:</strong> <span id="fileName"></span></p>
+          <p><strong>SHA256:</strong> <span id="fileHash"></span></p>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+          <button id="btnAnalyze" class="btn primary">Analyze</button>
+          <button id="btnReset" class="btn">Reset</button>
+        </div>
+      </div>
+
+      <div class="panel card">
+        <h2>Result</h2>
+        <div style="display:flex;align-items:center;gap:10px;margin:4px 0 8px">
+          <div class="badge b-warn" id="riskBadge">Score</div>
+          <div id="riskScore" style="font-size:2rem;font-weight:800">–</div>
+        </div>
+        <p id="riskSummary">Awaiting file…</p>
+
+        <h3 style="margin-top:14px">Indicators</h3>
+        <table id="indicators">
+          <thead><tr><th>Indicator</th><th>Value</th><th>Weight</th><th>Status</th></tr></thead>
+          <tbody></tbody>
+        </table>
+
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+          <button id="btnExport" class="btn">Export JSON</button>
+          <a class="btn ghost" href="#dashboard">Open Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="dashboard">
+    <h2>Analyst Dashboard (Demo Data)</h2>
+    <div class="panel card" style="margin-bottom:14px">
+      <div class="grid-3">
+        <div class="feature"><div class="tag">Legit ↔ Malicious</div><div style="font-size:2rem;font-weight:800" id="distText">12 / 37</div><p>Past 24h classification count</p></div>
+        <div class="feature"><div class="tag">Top Bank Spoofed</div><div style="font-size:2rem;font-weight:800">ABC Bank</div><p>Package prefix collisions</p></div>
+        <div class="feature"><div class="tag">Common Abuse</div><div style="font-size:2rem;font-weight:800">Accessibility</div><p>Overlay + a11y combo</p></div>
+      </div>
+    </div>
+
+    <div class="panel card">
+      <h3 style="margin-bottom:8px">Recent Suspicious APKs</h3>
+      <table id="feed">
+        <thead><tr><th>Package</th><th>SHA256 (short)</th><th>Risk</th><th>Primary IOC</th><th>Status</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PROBLEM STATEMENT -->
+  <section id="problem">
+    <h2>Hackathon Problem 8 — Detecting Fake Banking APKs</h2>
+    <div class="panel card">
+      <p><strong>Goal:</strong> Build an automated system that flags malicious banking APKs using static/dynamic analysis and intelligence feeds.</p>
+      <ul>
+        <li>Static: Manifest, permissions, signing cert, strings/URLs.</li>
+        <li>Dynamic (heuristics): overlay creation, SMS/OTP read, a11y abuse.</li>
+        <li>ML: combine features into a risk score (0–100).</li>
+        <li>Intel: enrich domains/IPs, WHOIS, ASN, blocklists.</li>
+      </ul>
+      <p style="margin-top:8px">Prototype links inside PPT as per rules:<br/>
+        <a href="#">Demo Video (placeholder)</a> • <a href="#">Prototype URL (placeholder)</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <h2>FAQ</h2>
+    <div class="grid-2">
+      <div class="panel card"><h3>Does the demo upload my APK?</h3><p>No. The prototype does not upload files. Analysis and risk scoring are simulated in your browser for UX demonstration.</p></div>
+      <div class="panel card"><h3>How would a real system work?</h3><p>A backend would run a sandbox (e.g., Android emulator) and static tooling, enrich IOCs via TI feeds, and return a signed JSON report.</p></div>
+      <div class="panel card"><h3>Is there a CLI?</h3><p>Planned: a simple CLI wrapping the same scoring to integrate with CI and takedown workflows.</p></div>
+      <div class="panel card"><h3>Is it open-source?</h3><p>The demo UI can be open-sourced; model weights and TI connectors may remain private due to abuse risk.</p></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>© 2025 BankShield — Prototype UI for Hackathon 2025</div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="index.js"></script>
+</body>
+</html>

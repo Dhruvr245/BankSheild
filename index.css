@@ -1,0 +1,73 @@
+:root{
+  --bg:#0b1220;--panel:#111a2e;--panel-2:#0e1628;--text:#e6edf6;--muted:#92a0b3;
+  --brand:#38bdf8;--brand-2:#0ea5e9;--ok:#10b981;--warn:#f59e0b;--bad:#ef4444;
+  --ring:rgba(56,189,248,.35);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial,'Noto Sans',sans-serif;
+  background:linear-gradient(135deg,var(--bg),#0a0f1c);color:var(--text);scroll-behavior:smooth}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Layout */
+header{position:sticky;top:0;z-index:50;background:rgba(11,18,32,.7);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav{max-width:1200px;margin:auto;display:flex;align-items:center;gap:20px;padding:14px 20px}
+.logo{font-weight:800;letter-spacing:.3px;font-size:1.15rem;color:var(--brand)}
+.nav a{color:var(--text);opacity:.9}
+.navlinks{margin-left:auto;display:flex;flex-wrap:wrap;gap:16px}
+.cta{background:var(--brand);color:#06101c;font-weight:700;border-radius:12px;padding:10px 14px;box-shadow:0 6px 20px rgba(56,189,248,.25)}
+
+.hero{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:56px 20px 28px}
+.h-title{font-size:clamp(2rem,4vw,3.25rem);line-height:1.05;margin:4px 0 10px;color:#e9f3ff}
+.h-sub{color:var(--muted);font-size:1.05rem;max-width:700px}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(56,189,248,.35);padding:6px 10px;border-radius:999px;color:#bfeaff;background:rgba(56,189,248,.08);font-weight:600;margin-bottom:10px}
+
+.panel{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid rgba(255,255,255,.06);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.card{padding:18px}
+
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+
+section{max-width:1200px;margin:0 auto;padding:28px 20px}
+h2{font-size:1.6rem;margin:0 0 12px}
+h3{font-size:1.1rem;margin:0 0 6px}
+p{color:var(--muted)}
+
+.feature{padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,.06)}
+.feature .tag{font-size:.8rem;font-weight:700;opacity:.85}
+
+.upload{border:2px dashed rgba(255,255,255,.18);border-radius:18px;padding:18px;display:grid;gap:12px;place-items:center;text-align:center}
+.upload.drag{border-color:var(--brand)}
+.upload input{display:none}
+
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.1);padding:10px 14px;border-radius:12px;background:#15233d;cursor:pointer;font-weight:700}
+.btn.primary{background:var(--brand);color:#06101c;border-color:transparent}
+.btn.ghost{background:transparent}
+
+.progress{height:10px;background:#0a1222;border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand-2));transition:width .25s ease}
+
+table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
+th,td{padding:12px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
+th{font-size:.9rem;color:#d6e3f3}
+td{color:#c6d2e2}
+.badge{display:inline-block;padding:3px 8px;border-radius:999px;font-size:.8rem;font-weight:700}
+.b-ok{background:rgba(16,185,129,.15);color:#a7f3d0;border:1px solid rgba(16,185,129,.35)}
+.b-warn{background:rgba(245,158,11,.15);color:#fde68a;border:1px solid rgba(245,158,11,.35)}
+.b-bad{background:rgba(239,68,68,.15);color:#fecaca;border:1px solid rgba(239,68,68,.35)}
+
+.footer{color:#93a3b8;font-size:.9rem;padding:28px 20px;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
+
+/* Mobile */
+@media (max-width: 920px){
+  .hero{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr}
+  .grid-2{grid-template-columns:1fr}
+  .navlinks{display:none}
+}
+body {
+  background: linear-gradient(135deg, #0a1f44, #063c56);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="%2338bdf8" opacity="0.08"><circle cx="50" cy="50" r="45"/></svg>');
+  background-repeat: repeat;
+}
